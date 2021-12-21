@@ -8,7 +8,8 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-class ModeloBase(models.Model):
+class ModeloBase(models.Model): 
+
     id=models.AutoField(primary_key=True)
     estado=models.BooleanField('Estado', default=True)
     fecha_creacion=models.DateTimeField ('Fecha creación', auto_now=False, auto_now_add= True)

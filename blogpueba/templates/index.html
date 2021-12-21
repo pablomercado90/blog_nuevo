@@ -23,36 +23,38 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Blog: Desarrollo Sostenible</a>
+                <a class="navbar-brand" href="{% url 'blog:index' %}">Blog: Desarrollo Sostenible</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href= "index.html" >Inicio</a> </li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href=" { % url 'blog: about.html' %}">Sobre Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Posts</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:index' %}">Inicio</a> </li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:about' %}">Sobre Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:post' %}">Posts</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Categorias</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Crear Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:contacto' %}">Contacto</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" id= "bg" style="background-image: url('{% static "assets/img/objetivos-de-desarrollo-sostenible.jpg"%}')">
+        <header class="masthead" id= "bg" style="background-image: url({% block imagen %} {% static "assets/img/objetivos-de-desarrollo-sostenible.jpg"%} {% endblock imagen %})">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>17 Objetivos: Desarrollo Sostenible</h1>
-                            <span class="subheading">Un blog para debatir ideas y compartir propuestas</span>
+                            <h1>{% block titulo_principal %}17 Objetivos: Desarrollo Sostenible</h1> {% endblock titulo_principal%}
+                            <span class="subheading"> {% block titulo_secundario %} Un blog para debatir ideas y compartir propuestas {% endblock titulo_secundario %} </span>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
         <!-- Main Content-->
+        {% block contenido %}
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -67,7 +69,7 @@
                             <a href="#!">Start Bootstrap</a>
                             on September 24, 2021
                         </p>
-                    </div>
+                    </div> {% endblock contenido%}
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
