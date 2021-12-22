@@ -59,16 +59,22 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
+                    {% if posts %}
+                    {% for post in posts %}
                     <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                        <a href="{% url 'blog:post' %}">
+                            <h2 class="post-title"> {{ post.titulo }} </h2>
+                            <h3 class="post-subtitle"> {{ post.descripcion }} </h3>
                         </a>
                         <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2021
+                            Escrito por:
+                            <a href="#!"> {{ post.autor }} </a>
+                            {{ post.fecha_publicacion}}
                         </p>
+                        {% endfor %}
+                        {% else %}
+                        <h1> No existen posts registrados </h1>
+                        {% endif %}
                     </div> {% endblock contenido%}
         <!-- Footer-->
         <footer class="border-top">
@@ -101,7 +107,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; 17 Objetivos Desarrollo Sostenible 2021</div>
                     </div>
                 </div>
             </div>

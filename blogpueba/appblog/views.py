@@ -6,9 +6,14 @@ from .models import Post
 
 # Create your views here.
 class Inicio (ListView):
-    
+     
     def get(self, request, *args, **kwargs):
-            return render (request, "index.html")
+
+        posts=Post.objects.filter (publicado=True)
+        contex={
+            'posts': posts
+        }
+        return render (request, "index.html", contex)
 
 
 class About (ListView):
@@ -17,6 +22,7 @@ class About (ListView):
         return render (request, 'about.html')
 
 class BlogListaPost (View):
+    
     def get (self, request, *args, **kwargs):
         context={
             

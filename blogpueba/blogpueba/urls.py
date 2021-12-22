@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.urls.conf import include
+from django.urls.conf import include, re_path
 from blogpueba.views import saludo
 from blogpueba.views import saludo, despedida
+from django.conf import  settings
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +28,9 @@ urlpatterns = [
     path('', include(('appblog.urls', 'blog'))),
 ]
 
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve , {
+            'document_root':settings.MEDIA_ROOT
+        }),
+    ]
