@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block titulo%}
+Crear Post
+{% endblock titulo%}
+
+{% block imagen %} 
+{% static "assets/img/nos.png"%}
+{% endblock imagen %}
+
+{% block titulo_principal%}
+Crear Post
+{% endblock titulo_principal%}
+
+{% block titulo_secundario%}
+Por favor, escribe tu post y comparte tus propuestas con el mundo
+{% endblock titulo_secundario%}
+
+{% block contenido%}
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <form method="POST">
+                    {% csrf_token %}
+                        Titulo{{form.titulo}}
+                        <br>
+                        Slug{{form.slug}}   
+                        Descripcion{{form.descripcion}}
+                        <br>
+                        Autor {{form.autor}}
+                        <br>
+                        Categoria {{form.categoria}}
+                        <br>
+                        Contenido{{form.contenido}}
+                        <br>
+                        Imagen Referencial {{form.imagen_referencial}}
+                        <br>
+                        Publicado {{form.publicado}}
+                        <br>
+                        fecha_publicacion{{form.fecha_publicacion}}
+                        <br>
+                        <button type= "submit" > Enviar</button>
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock contenido%}
+

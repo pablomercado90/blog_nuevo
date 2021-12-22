@@ -53,7 +53,7 @@ class Post(ModeloBase):
     autor=models.ForeignKey (Autor, on_delete=models.CASCADE)
     categoria=models.ForeignKey(Categoria, on_delete=models.CASCADE)
     contenido=RichTextField()
-    imagen_referencial=models.ImageField ('Imagen referencial', upload_to='imagenes/', max_length=255)
+    imagen_referencial=models.ImageField ('Imagen referencial', null=True, blank=True, upload_to='imagenes/', max_length=255)
     publicado=models.BooleanField ('Publicado / no publicado', default=False)
     fecha_publicacion=models.DateField ('Fecha de publicación')
     
