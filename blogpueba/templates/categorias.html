@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block titulo%}
+Categorias
+{% endblock titulo%}
+
+{% block imagen %} 
+{% static "assets/img/nos.png"%}
+{% endblock imagen %}
+
+{% block titulo_principal%}
+Categorias
+{% endblock titulo_principal%}
+
+{% block titulo_secundario%}
+Por favor, elige tu post según su categoría:
+{% endblock titulo_secundario%}
+
+{% block contenido%}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% comment %} 
+            
+            <!-- Post preview-->
+            {% if posts %}
+            {% for post in posts %}
+            <div class="post-preview">
+                <a href="{% url 'blog:post' %}">
+                    <h2 class="post-title"> {{ post.titulo }} </h2>
+                    <h3 class="post-subtitle"> {{ post.descripcion }} </h3>
+                </a>
+                <p class="post-meta">
+                    Escrito por:
+                    <a href="#!"> {{ post.autor }} </a>
+                    {{ post.fecha_publicacion}}
+                </p>
+                {% endfor %}
+                {% else %}
+                <h1> No existen posts registrados </h1>
+                {% endif %} 
+                
+                {% endcomment %}
+{% endblock contenido%}

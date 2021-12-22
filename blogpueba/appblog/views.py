@@ -2,7 +2,8 @@ from django.shortcuts import get_object_or_404, render,  redirect
 from django.views.generic import ListView
 from django.views.generic.base import View
 from .forms import CrearPostForm
-from .models import Post
+from .models import Categoria, Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class Inicio (ListView):
@@ -47,7 +48,7 @@ class PostView (View):
         return render (request, 'post.html', context)
 
 
-class CrearPostView(View):
+class CrearPostView(LoginRequiredMixin, View):
     def get (self, request, *args, **kwargs):
         form=CrearPostForm()
         context={
@@ -62,7 +63,7 @@ class CrearPostView(View):
                 titulo = form.cleaned_data.get('titulo')
                 slug=form.cleaned_data.get('slug')
                 descripcion=form.cleaned_data.get('descripcion')
-                autor=form.cleaned_data.get('autor')
+                autor=form.cleaned_data.get('autor') #sacarlo del request.user
                 categoria=form.cleaned_data.get('categoria')
                 contenido=form.cleaned_data.get('contenido')
                 imagen_referencial=form.cleaned_data.get('imagen_referencial')
@@ -77,3 +78,11 @@ class CrearPostView(View):
         }
         return render (request, 'crearpost.html', context)
 
+class Categorias (ListView):
+     
+    def get(self, request, *args, **kwargs):
+        contex={
+
+        }
+        
+        return render (request, "categorias.html", contex)
