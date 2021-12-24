@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block titulo%}
+Login
+{% endblock titulo%}
+
+{% block imagen %} 
+{% static "assets/img/nos.png"%}
+{% endblock imagen %}
+
+{% block titulo_principal%}
+Bienvenido
+{% endblock titulo_principal%}
+
+{% block titulo_secundario%}
+Somos lo que hacemos, para cambiar lo que somos
+{% endblock titulo_secundario%}
+
+{% block contenido%}
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="login-form">
+                    <form action="" method="post">
+                        {% csrf_token%}
+                        <h4> Por favor, ingrese su usuario </h4>
+                        <br>
+                                <div class="form.group"> 
+                                <label> Nombre de usuario </label>
+                                <input type="text" class="form-control" placeholder="Nombre de usuario" name="username">
+                            </div>
+                            <div class="form.group"> 
+                                <label> Contraseña </label>
+                                <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                            </div>
+                            <button type="submit" class="btn btn-sucess btn-flat m-b-30 m-t-30">Iniciar Sesión</button>
+                    </form> 
+                </div>              
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock contenido%}

@@ -30,12 +30,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:index' %}">Inicio</a> </li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:about' %}">Sobre Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:post' %}">Posts</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:categorias' %}">Categorias</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:crear_post' %}">Crear Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:contacto' %}">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:index' %}">Inicio</a> </li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:about' %}">Sobre Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:categorias' %}">Categorias</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:crear_post' %}">Crear Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:contacto' %}">Contacto</a></li>
+                        {% if user.is_authenticated %}
+                        
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:index' %}">Usuario: {{ user.username }}</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'login:logout' %}">Cerrar Sesion</a></li>
+
+                        {% else %}
+
+                        <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'login:login' %}">Iniciar sesión</a></li>
+
+                        {% endif %}
+                        
                     </ul>
                 </div>
             </div>

@@ -1,9 +1,11 @@
+from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import get_object_or_404, render,  redirect
 from django.views.generic import ListView
 from django.views.generic.base import View
-from .forms import CrearPostForm
-from .models import Categoria, Post
+from .forms import CrearPostForm, CrearUsuario
+from .models import Autor, Categoria, Post
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 class Inicio (ListView):
@@ -40,7 +42,27 @@ class Contacto (View):
         return render (request, 'contact.html', context)
 
 
-class PostView (View):
+class Login (View):
+    def get (self, request, *args, **kwargs):
+        
+        context={
+           
+        }
+        return render (request, 'registration/login.html', context)
+
+
+class Logout (View):
+    def get (self, request, *args, **kwargs):
+        
+        context={
+           
+        }
+        return render (request, 'registration/login.html', context)
+
+
+
+
+class VerPost (LoginRequiredMixin,  View):
     def get (self, request, *args, **kwargs):
         context={
             
@@ -86,3 +108,29 @@ class Categorias (ListView):
         }
         
         return render (request, "categorias.html", contex)
+
+
+class RegistrarUsuario(View):
+    def get (self, request, *args, **kwargs):
+        form=CrearUsuario
+        context={
+            'form':form          
+        }
+        return render (request, 'registration/registre.html', context)
+
+    def post (self, request, *args, **kwargs):
+        if request.method == "POST":
+            form = CrearUsuario (request.POST)
+            if form.is_valid ():
+                form.save()
+                username=form.cleaned_data['username']
+                password=form.cleaned_data['password1']
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect ('blog: index')
+
+        context={ 
+
+        }
+        return render (request, 'registration/registre.html', context)    
+

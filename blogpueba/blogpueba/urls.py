@@ -16,16 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.urls.conf import include, re_path
-from blogpueba.views import saludo
-from blogpueba.views import saludo, despedida
 from django.conf import  settings
 from django.views.static import serve
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('saludar', saludo),
-    path ('nos vemos', despedida),
     path('', include(('appblog.urls', 'blog'))),
+    path('accounts/', include(('django.contrib.auth.urls','login'))),
 ]
 
 if settings.DEBUG:
