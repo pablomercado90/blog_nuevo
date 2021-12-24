@@ -2,6 +2,7 @@ from django import forms
 from django.db.models import fields
 from .models import Post
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 #importa ck editor...leer
 
 class CrearPostForm(forms.ModelForm):
@@ -11,4 +12,6 @@ class CrearPostForm(forms.ModelForm):
 
 
 class CrearUsuario(UserCreationForm):
-    pass
+    class Meta:
+        model=User
+        fields=('first_name', 'last_name', 'email', 'username', 'password1', 'password2')

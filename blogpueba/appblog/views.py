@@ -132,5 +132,5 @@ class RegistrarUsuario(View):
         context={ 
 
         }
-        return render (request, 'registration/registre.html', context)    
+        return render (request, 'registre.html', context)    
 
