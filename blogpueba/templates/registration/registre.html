@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo%}
-Login
+Registrarse
 {% endblock titulo%}
 
 {% block imagen %} 
@@ -27,8 +27,20 @@ Somos lo que hacemos, para cambiar lo que somos
                         {% csrf_token%}
                         <h4> Registro de usuario </h4>
                         <br>
-                        {{ form }}
+                        Nombre{{form.first_name}}
+                        <br>
+                        Apellido{{form.last_name}}   
+                        <br>
+                        Email {{form.email}} 
+                        <br>
+                        Username {{form.username}}
+                        <br>
+                        Password{{form.password1}}
+                        <br>
+                        Confirmar Password {{form.password2}}
+
                         <button type= "submit" > Enviar</button>
+
                     </form> 
                 </div>              
             </div>

@@ -1,11 +1,16 @@
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
 from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import get_object_or_404, render,  redirect
 from django.views.generic import ListView
 from django.views.generic.base import View
 from .forms import CrearPostForm, CrearUsuario
+from django.contrib.auth.models import User
 from .models import Autor, Categoria, Post
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
+from django.urls import reverse_lazy
 
 # Create your views here.
 class Inicio (ListView):
@@ -110,9 +115,17 @@ class Categorias (ListView):
         return render (request, "categorias.html", contex)
 
 
-class RegistrarUsuario(View):
+class RegistrarUsuario(CreateView):
+    # model=User
+    # template_name='registration/registre.html'
+    # form_class=CrearUsuario
+    # success_url= reverse_lazy ('blog:index')
+
+
+
+
     def get (self, request, *args, **kwargs):
-        form=CrearUsuario
+        form=CrearUsuario()
         context={
             'form':form          
         }
@@ -122,15 +135,15 @@ class RegistrarUsuario(View):
         if request.method == "POST":
             form = CrearUsuario (request.POST)
             if form.is_valid ():
-                form.save()
                 username=form.cleaned_data['username']
                 password=form.cleaned_data['password1']
+                form.save()
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return redirect ('blog: index')
+                return redirect ('blog:index')
 
         context={ 
 
         }
-        return render (request, 'registre.html', context)    
+        return render (request, 'index.html', context)    
 
