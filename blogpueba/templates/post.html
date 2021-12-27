@@ -18,6 +18,23 @@ Breve biografia sobre el grupo
 {% endblock titulo_secundario%}
 
 {% block contenido%}
+<!-- Navigation-->
+                {% if user.is_authenticated %}
+                
+                <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:categorias' %}">Categorias {{ Post.titulo }}</a></li>
+
+                {% else %}
+
+                <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'login:login' %}">Iniciar sesión</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-2 py-2 py-lg-3" href="{% url 'blog:registre' %}">Registrarse</a></li>
+
+                {% endif %}
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
  <!-- Post Content-->
  <article class="mb-4">
     <div class="container px-4 px-lg-5">
