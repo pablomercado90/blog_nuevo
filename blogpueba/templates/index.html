@@ -64,6 +64,25 @@
                 </div>
             </div>
         </header>
+        <!-- Barra de búsqueda -->
+        <div class = "conteiner">
+            <div class = "row">
+                <div class="col-md-12 search">
+                    <form class="" method="GET">
+                        <div id="custom-search-input">
+                            <div class="input-group col-md 12">
+                                <input type="text"  class="form-control" placeholder="Buscar..." name="buscar">
+                                <span class="input-group-list">
+                                    <i class="icon icon-search"></i>
+                                    <button type="submit" class="boton btn-success">Buscar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Main Content-->
         {% block contenido %}
         <div class="container px-4 px-lg-5">
@@ -73,7 +92,7 @@
                     {% if posts %}
                     {% for post in posts %}
                     <div class="post-preview">
-                        <a href="{% url 'blog:post' %}">
+                        <a href="{% url 'blog:ver_post' post.slug %}">
                             <h2 class="post-title"> {{ post.titulo }} </h2>
                             <h3 class="post-subtitle"> {{ post.descripcion }} </h3>
                         </a>

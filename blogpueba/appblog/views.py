@@ -5,6 +5,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import get_object_or_404, render,  redirect
 from django.views.generic import ListView
 from django.views.generic.base import View
+from django.views.generic.detail import DetailView
 from .forms import CrearPostForm, CrearUsuario
 from django.contrib.auth.models import User
 from .models import Autor, Categoria, Post
@@ -14,14 +15,25 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 class Inicio (ListView):
-     
     def get(self, request, *args, **kwargs):
-
         posts=Post.objects.filter (publicado=True)
         contex={
             'posts': posts
         }
         return render (request, "index.html", contex)
+
+
+class VerPost(DetailView):
+    def get (self, request, slug, *args, **kwargs):
+        try:
+            verposts=Post.objects.get (slug=slug)
+        except:
+            verposts=None
+        context={
+            'verposts': verposts,
+        }
+        return render (request, 'post.html', context)
+
 
 
 class About (ListView):
@@ -65,14 +77,6 @@ class Logout (View):
         return render (request, 'registration/login.html', context)
 
 
-
-
-class VerPost (LoginRequiredMixin,  View):
-    def get (self, request, *args, **kwargs):
-        context={
-            
-        }
-        return render (request, 'post.html', context)
 
 
 class CrearPostView(LoginRequiredMixin, View):

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Inicio, About, BlogListaPost, Contacto,  CrearPostView, Login, Categorias, VerPost, Logout, RegistrarUsuario
+from .views import Inicio, About, BlogListaPost, Contacto,  CrearPostView, Login, Categorias,  Logout, RegistrarUsuario, VerPost
 
 app_name = 'blog' 
 
@@ -21,7 +21,7 @@ urlpatterns = [
 
     path ('categorias/', Categorias.as_view(), name='categorias'),
 
-    path ('post/', VerPost.as_view(), name='post'),
+    path ('<slug:slug>', VerPost.as_view(), name='ver_post'),
 
     path ('crear_usuario/', RegistrarUsuario.as_view(), name='registre'),
     
