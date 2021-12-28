@@ -6,6 +6,7 @@ from django.db.models.fields import TextField
 from django.db.models.manager import Manager
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class ModeloBase(models.Model): 
@@ -32,25 +33,25 @@ class Categoria(ModeloBase):
         return self.nombre
 
 
-class Autor(ModeloBase):
-    nombre=models.CharField('Nombres', max_length=250)
-    apellido=models.CharField('Apellido', max_length=250)
-    email=models.CharField('Correo electrónico', max_length=250)
-    descripcion=models.TextField('Descripción')
-    web=models.URLField ('Web', null=True, blank=True)
-    facebook=models.URLField ('Facebook', null=True, blank=True)
-    twitter=models.URLField ('Twitter', null=True, blank=True)
-    instagram=models.URLField ('Instagram', null=True, blank=True)
+# class Autor(ModeloBase):
+#     nombre=models.CharField('Nombres', max_length=250)
+#     apellido=models.CharField('Apellido', max_length=250)
+#     email=models.CharField('Correo electrónico', max_length=250)
+#     descripcion=models.TextField('Descripción')
+#     web=models.URLField ('Web', null=True, blank=True)
+#     facebook=models.URLField ('Facebook', null=True, blank=True)
+#     twitter=models.URLField ('Twitter', null=True, blank=True)
+#     instagram=models.URLField ('Instagram', null=True, blank=True)
 
-    def __str__(self):
-        return self.nombre
+#     def __str__(self):
+#         return self.nombre
 
         
 class Post(ModeloBase):
     titulo=models.CharField ('Título del post', max_length=200, unique=True)
     slug=models.CharField ('Slug', max_length=150, unique=True)
     descripcion=models.TextField ('Descripción')
-    autor=models.ForeignKey (Autor, on_delete=models.CASCADE)
+    autor=models.ForeignKey (User, on_delete=models.CASCADE)
     categoria=models.ForeignKey(Categoria, on_delete=models.CASCADE)
     contenido=RichTextField()
     imagen_referencial=models.ImageField ('Imagen referencial', null=True, blank=True, upload_to='imagenes/', max_length=255)

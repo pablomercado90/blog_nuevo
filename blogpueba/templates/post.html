@@ -5,8 +5,11 @@
 {{ verposts.titulo }}
 {% endblock titulo%}
 
+
 {% block imagen %} 
+{% if verposts.imagen_referencial%}
 {{verposts.imagen_referencial.url}}
+{% endif %}
 {% endblock imagen %}
 
 {% block titulo_principal%}

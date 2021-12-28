@@ -8,7 +8,7 @@ from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from .forms import CrearPostForm, CrearUsuario
 from django.contrib.auth.models import User
-from .models import Autor, Categoria, Post
+from .models import Categoria, Post
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
@@ -16,7 +16,9 @@ from django.urls import reverse_lazy
 # Create your views here.
 class Inicio (ListView):
     def get(self, request, *args, **kwargs):
-        posts=Post.objects.filter (publicado=True)
+        filtro=request.GET.get('buscar', '')
+        posts=Post.objects.filter (publicado=True).filter (titulo__icontains=filtro)
+
         contex={
             'posts': posts
         }
@@ -94,7 +96,7 @@ class CrearPostView(LoginRequiredMixin, View):
                 titulo = form.cleaned_data.get('titulo')
                 slug=form.cleaned_data.get('slug')
                 descripcion=form.cleaned_data.get('descripcion')
-                autor=form.cleaned_data.get('autor') #sacarlo del request.user
+                autor=request.user
                 categoria=form.cleaned_data.get('categoria')
                 contenido=form.cleaned_data.get('contenido')
                 imagen_referencial=form.cleaned_data.get('imagen_referencial')
@@ -110,13 +112,15 @@ class CrearPostView(LoginRequiredMixin, View):
         return render (request, 'crearpost.html', context)
 
 class Categorias (ListView):
-     
-    def get(self, request, *args, **kwargs):
-        contex={
+     model=Categoria
+     template_name = 'categorias.html'
 
-        }
+    # def get(self, request, *args, **kwargs):
+    #     contex={
+
+    #     }
         
-        return render (request, "categorias.html", contex)
+    #     return render (request, "categorias.html", contex)
 
 
 class RegistrarUsuario(CreateView):

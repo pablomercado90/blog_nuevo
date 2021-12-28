@@ -13,7 +13,7 @@ class AutorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categoria, CategoriaAdmin)
-admin.site.register(Autor, AutorAdmin)
+#admin.site.register(User, AutorAdmin)
 admin.site.register(Post)
 admin.site.register(Comentario)
 admin.site.register(Web)

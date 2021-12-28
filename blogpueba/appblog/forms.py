@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class CrearPostForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields=('titulo', 'slug', 'descripcion', 'autor', 'categoria', 'contenido', 'imagen_referencial', 'publicado', 'fecha_publicacion')
+        fields=('titulo', 'slug', 'descripcion', 'categoria', 'contenido', 'imagen_referencial', 'publicado', 'fecha_publicacion')
 
 
 class CrearUsuario(UserCreationForm):
